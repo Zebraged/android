@@ -1,5 +1,7 @@
 package com.example.android_project_weatherapp.Objects;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
@@ -20,7 +22,7 @@ import com.example.android_project_weatherapp.RoomDB.AppDatabase;
 import com.example.android_project_weatherapp.RoomDB.Destination;
 import com.example.android_project_weatherapp.RoomDB.DestinationDao;
 import com.example.android_project_weatherapp.Util.TextPrep;
-import java.lang.ref.WeakReference;
+
 
 
 
@@ -137,15 +139,20 @@ public class Presenter implements IPresenter {
         };
     }
     private RequestQueue.RequestFinishedListener locaListe;
-    private void createLocListe(TextView loca, TextView info) {
-        final WeakReference<TextView> txtloca = new WeakReference<>(loca);
-        final WeakReference<TextView> txtinfo = new WeakReference<>(info);
+    private void createLocListe(final TextView loca, final TextView info) {
         locaListe = new RequestQueue.RequestFinishedListener<Object>() {
             @Override
             public void onRequestFinished(Request<Object> request) {
-                txt.prepWeather(json.getWeather());
-                txtloca.get().setText(txt.getNameCountry());
-                txtinfo.get().setText(txt.getInfo());
+
+                Handler handler =new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txt.prepWeather(json.getWeather());
+                        info.setText(txt.getInfo());
+                        loca.setText(txt.getNameCountry());
+                    }
+                });
             }
         };
 
