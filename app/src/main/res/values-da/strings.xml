@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vejr Application</string>
+    <string name="AddHelp">For at tilføje en destination, skriv by navn eller by navn og lande kode sepereret med et komma, fx \"Odense\" eller \"Odense, DA\".</string>
+    <string name="DeleteHelp">For at slette en destination tryk og hold på destinationen og bekræft sletningen.</string>
+    <string name="DismisHelp">Afvis</string>
+    <string name="HelpMain">Denne application kræver tilladelse til placerings services, for at hente den nuværende positions vejr.</string>
+    <string name="addbutton">Tilføj</string>
+    <string name="hinttext">Skriv by navn (på engelsk)</string>
+    <string name="snackdelete">Bekræft sletning af:</string>
+    <string name="wait">Henter tilgængelig information........</string>
+    <string name="humid">"Luftfugtighed : "</string>
+    <string name="weather">"Vejr : "</string>
+    <string name="wind">"Vindhastighed &amp; Retning : "</string>
+    <string name="locationpermission">"placerings tilladelse er påkrævet for at få lokal vejr information "</string>
+    <string name="granted">placerings tilladelse er gevet</string>
+</resources>

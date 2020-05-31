@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Weather Application</string>
+    <string name="hinttext">Enter City Name</string>
+    <string name="addbutton">Add</string>
+    <string name="wait">Retrieving available Information.....</string>
+    <string name="snackdelete">Confirm Deletion of: </string>
+    <string name="HelpMain">This app needs permission to location services, to retrieve the weather information available for your current location.</string>
+    <string name="AddHelp">To add a destination, write the city or the city and country code, seperated with a colon. fx \"Odense\" or \"Odense, DA\".</string>
+    <string name="DeleteHelp">To remove a destination from the list, click and hold the destination and confirm the deletion.</string>
+    <string name="DismisHelp">Dismiss</string>
+    <string name="Information" translatable="false">Information</string>
+    <string name="humid">"Humidity : "</string>
+    <string name="wind">"Windspeed &amp; Direction : "</string>
+    <string name="weather">"Weather : "</string>
+    <string name="locationpermission">Location Permission required to get local data</string>
+    <string name="granted">Location permission is granted</string>
+</resources>
