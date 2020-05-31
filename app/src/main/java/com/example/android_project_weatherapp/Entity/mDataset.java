@@ -35,9 +35,16 @@ public class mDataset implements IDataSuplier {
     }
     public void addElement(Weather w) {
         if (!weathers.contains(w)) {
+
+            for (int i = 0 ; i< weathers.size();i++){
+                if (weathers.get(i).getId() == w.getId()){
+                    weathers.remove(i);
+                    weathers.add(w);
+                    return;
+                }
+            }
             weathers.add(w);
         }
-
     }
     @Override
     public int getSize() {

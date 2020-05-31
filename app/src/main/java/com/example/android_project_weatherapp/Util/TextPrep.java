@@ -29,6 +29,9 @@ public class TextPrep {
         return weather;
     }
     public String getNameCountry() {
+        if (name == null || name == "null"){
+            return "Unknown area";
+        }
         return name + ", "+country;
     }
     public String getInfo() {

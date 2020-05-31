@@ -29,7 +29,7 @@ import com.example.android_project_weatherapp.Util.TextPrep;
 public class Presenter implements IPresenter {
 
     private UrlGenerator url;
-    private JsonReq json;
+//    private JsonReq json;
     private TextPrep txt;
     private DestinationDao dao;
     private IRepos repo;
@@ -38,20 +38,22 @@ public class Presenter implements IPresenter {
 
     public Presenter() {
         url = new UrlGenerator();
-        json = new JsonReq();
+//        json = new JsonReq();
         txt = new TextPrep();
         dao = AppDatabase.getInstance().destinationDao();
         repo = new Repos();
         data = new mDataset();
         mAdapter = new WeatherAdapter(data);
         data.setmAdapter(mAdapter);
-        creatBulk();
-        createSingleList();
+
+
     }
 
 
     @Override
     public void insertNameDestination(String destination, int type, final Context context) {
+        final JsonReq json = new JsonReq();
+        createSingleList(json);
         String reg = destination;
         reg.replaceAll("[^0-9a-zA-ZæøåÆØÅ]+", "");
         final int tp = type;
@@ -74,6 +76,8 @@ public class Presenter implements IPresenter {
     }
     @Override
     public void getStartData(Context context) {
+        final JsonReq json = new JsonReq();
+        creatBulk(json);
         final Context cntxt = context;
         new dbAsyncGet(new IPostAsyncListener<Destination[]>() {
             @Override
@@ -93,7 +97,8 @@ public class Presenter implements IPresenter {
     }
     @Override
     public void getCurrentWeather(double lat, double lon, TextView loc, TextView Info) {
-        createLocListe(loc, Info);
+        final JsonReq json = new JsonReq();
+        createLocListe(json ,loc, Info);
         RequestHandler.getInstance(loc.getContext()).getQueue().removeRequestFinishedListener(singleList);
         RequestHandler.getInstance(loc.getContext()).getQueue().removeRequestFinishedListener(bulkList);
         RequestHandler.getInstance(loc.getContext()).getQueue().add(json.createRequest(url.createLocUrl(lat, lon)));
@@ -106,7 +111,7 @@ public class Presenter implements IPresenter {
 
 
     private RequestQueue.RequestFinishedListener bulkList;
-    private void creatBulk() {
+    private void creatBulk(final JsonReq json) {
         bulkList = new RequestQueue.RequestFinishedListener<Object>() {
             @Override
             public void onRequestFinished(Request<Object> request) {
@@ -118,7 +123,7 @@ public class Presenter implements IPresenter {
         };
     }
     private RequestQueue.RequestFinishedListener singleList;
-    private void createSingleList() {
+    private void createSingleList(final JsonReq json) {
         singleList = new RequestQueue.RequestFinishedListener<Object>() {
             @Override
             public void onRequestFinished(Request<Object> request) {
@@ -139,7 +144,7 @@ public class Presenter implements IPresenter {
         };
     }
     private RequestQueue.RequestFinishedListener locaListe;
-    private void createLocListe(final TextView loca, final TextView info) {
+    private void createLocListe(final JsonReq json , final TextView loca, final TextView info) {
         locaListe = new RequestQueue.RequestFinishedListener<Object>() {
             @Override
             public void onRequestFinished(Request<Object> request) {
@@ -151,6 +156,7 @@ public class Presenter implements IPresenter {
                         txt.prepWeather(json.getWeather());
                         info.setText(txt.getInfo());
                         loca.setText(txt.getNameCountry());
+
                     }
                 });
             }
